@@ -21,6 +21,13 @@ end
 
 # reconfigure the installation
 execute 'reconfigure-chef-server' do
-  command 'private-chef-ctl reconfigure'
+  # http://www.oreilly.com/catalog/errata.csp?isbn=0636920032397
+  # Chef 11 and below
+  # command 'private-chef-ctl reconfigure'
+  # Chef 12 and above
+  # command 'chef-server-ctl reconfigure'
+  command "chef-server-ctl install chef-manage"
+  command "chef-server-ctl reconfigure"
+  command "chef-manage-ctl reconfigure"
   action :nothing
 end
